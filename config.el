@@ -65,3 +65,6 @@ user-full-name "Guancheng Fu"
        (if (frame-parameter nil 'fullscreen) nil 'fullboth)))
 ;; Bind fullscreen to key f11
 (global-set-key [f11] 'fullscreen)
+
+
+;; Add java support
