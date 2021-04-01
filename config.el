@@ -57,3 +57,11 @@ user-full-name "Guancheng Fu"
 (setq url-proxy-services '(("http" . "127.0.0.1:41091")))
 ;; Change font size
 (set-face-attribute 'default nil :height 160)
+
+;; Make the window to maximum at start up.
+(defun fullscreen ()
+  (interactive)
+  (set-frame-parameter nil 'fullscreen
+       (if (frame-parameter nil 'fullscreen) nil 'fullboth)))
+;; Bind fullscreen to key f11
+(global-set-key [f11] 'fullscreen)
