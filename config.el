@@ -67,4 +67,7 @@ user-full-name "Guancheng Fu"
 (global-set-key [f11] 'fullscreen)
 
 
-;; Add java support
+;; Set fullscreen at initial bootup
+(setq initial-frame-alist (quote ((fullscreen . maximized))))
+;; Highlight the current line.
+(global-hl-line-mode 1)
