@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 user-full-name "Guancheng Fu"
-      user-mail-address "gf59@duke.edu"
+user-mail-address "gf59@duke.edu"
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -62,7 +62,7 @@ user-full-name "Guancheng Fu"
 (defun fullscreen ()
   (interactive)
   (set-frame-parameter nil 'fullscreen
-       (if (frame-parameter nil 'fullscreen) nil 'fullboth)))
+                       (if (frame-parameter nil 'fullscreen) nil 'fullboth)))
 ;; Bind fullscreen to key f11
 (global-set-key [f11] 'fullscreen)
 
@@ -71,3 +71,43 @@ user-full-name "Guancheng Fu"
 (setq initial-frame-alist (quote ((fullscreen . maximized))))
 ;; Highlight the current line.
 (global-hl-line-mode 1)
+
+;; Ignore the beep noise from emacs
+(setq ring-bell-function 'ignore)
+
+;; Set the yes or no.
+(fset 'yes-or-no-p 'y-or-n-p)
+
+
+;; this function will indent the entire buffer.
+(defun indent-buffer()
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+
+;; bound this to a key.
+(defun indent-region-or-buffer()
+  (interactive)
+  (save-excursion
+    (if (region-active-p)
+        (progn
+          (indent-region (region-beginning) (region-end))
+          (message "Indent selected region."))
+      (progn
+        (indent-buffer)
+        (message "Indnt buffer.")))))
+
+(global-set-key (kbd "C-M-\\") 'indent-region-or-buffer)
+
+(setq hippie-expand-try-function-list '(try-expand-debbrev
+					try-expand-debbrev-all-buffers
+					try-expand-debbrev-from-kill
+					try-complete-file-name-partially
+					try-complete-file-name
+					try-expand-all-abbrevs
+					try-expand-list
+					try-expand-line
+					try-complete-lisp-symbol-partially
+					try-complete-lisp-symbol))
+
+(global-set-key (kbd "s-/") 'hippie-expand)
